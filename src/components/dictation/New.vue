@@ -1,15 +1,17 @@
 <template>
     <Win
         :title="winTitle" 
+        :htmlClass="htmlClass"
         :content="winContent"
+        :winType="winType"
         :controls="winControls"></Win>
 </template>
 
 <script>
-import Win from '@/components/win/Win.vue'
+import Win from '@/components/win'
 
 export default {
-    name: 'NewDictation',
+    name: 'newDictation',
     components: {
         Win
     },
@@ -19,7 +21,9 @@ export default {
             winContent: 'New dictionary window',
             winControls: {
                 expand: true
-            }
+            },
+            htmlClass: 'new-dictation',
+            winType: 'newDictation'
         }
     }
 }

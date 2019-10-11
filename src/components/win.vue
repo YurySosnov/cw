@@ -1,5 +1,5 @@
 <template>
-    <div class="win" :class="{'minimized' : minimized}">
+    <div class="win" :class="[{'minimized' : minimized}, htmlClass]">
         <div class="win-top">
             <div class="win-title">{{ title }}</div>
             <div class="win-controls" v-if="hasControls">
@@ -13,22 +13,43 @@
                 </template>
             </div>
         </div>
-        <div class="win-body">{{ content }}</div>
+        <div  class="win-body">
+            <newDictationInner v-if="winType === 'newDictation'"></newDictationInner>
+        </div>
     </div>
 </template>
 
 <script>
-import { log } from 'util';
+import newDictationInner from '@/components/dictation/newInner.vue'
 
 export default {
     name: 'Win',
-    conponents: {
-        log
+    components: {
+        newDictationInner
     },
     props: {
-        title: String,
-        content: String,
-        controls: Object
+        title: {
+            type: String,
+            default: 'Title'
+        },
+        content: {
+            type: String,
+            default: ''
+        },
+        controls: {
+            type: Object,
+            default: function() {
+                return {};
+            }
+        },
+        htmlClass: {
+            type: String,
+            default: ''
+        },
+        winType: {
+            type: String,
+            default: ''
+        }
     },
     methods: {
         validateControls: function() {
@@ -66,14 +87,7 @@ export default {
 </script>
 
 <style lang="less">
-@win_background_color: #F5F5F5;
-@border_radius_big: 16px;
-@border_radius_middle: 8px;
-@win_title_font_size: 30px;
-@win_title_color: #3E3E3E;
-@win_top_background_color: #E6E6E6;
-@win_top_height: 70px;
-@win_padding: 30px;
+@import "../styles/_variables.less";
 
 .win {
     .win-top {
