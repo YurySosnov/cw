@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import Win from '@/components/win.vue'
+import Win from '@/components/Win.vue'
 
 export default {
-    name: 'oneTry',
+    name: 'OneTry',
     props: {
         name: String
     },

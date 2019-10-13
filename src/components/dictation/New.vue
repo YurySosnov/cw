@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Win from '@/components/win'
+import Win from '@/components/Win.vue'
 
 export default {
     name: 'newDictation',
@@ -32,5 +32,6 @@ export default {
 <style lang="less">
     .new-dictation {
         width: 720px;
+        margin-bottom: 20px;
     }
 </style>

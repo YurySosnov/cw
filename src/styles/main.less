@@ -17,13 +17,6 @@ body {
     padding: 50px;
 }
 
-input {
-    height: 50px;
-    border-radius: @border_radius_middle;
-    border: @border;
-    background-color: #fff;
-}
-
 .nav {
     width: 100%;
     height: 50px;
@@ -43,5 +36,60 @@ input {
         &:hover {
             background-color: #ddd;
         }
+    }
+}
+
+.ui-line {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    &-last {
+        margin-bottom: 0;
+    }
+    &-align-right {
+        justify-content: flex-end;
+    }
+}
+
+.ui-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    .ui-block-name {
+        font-size: @font_size;
+        color: @text_color;
+        padding-right: 20px;
+    }
+    .ui-input {
+        color: @text_color;
+        height: @ui_height;
+        border-radius: @border_radius_middle;
+        border: @border;
+        background-color: #fff;
+        padding: 0 14px;
+        font-size: @font_size;
+    }
+}
+
+.button {
+    height: @ui_height;
+    padding: 0 25px;
+    color: #fff;
+    border: none;
+    font-size: @font_size;
+    background-color: @ui_blue;
+    border-radius: @border_radius_middle;
+    cursor: pointer;
+    &.arrow {
+        background-repeat: no-repeat;
+        background-position: right 25px center;
+        background-size: 16px;
+        padding-right: 66px;
+        background-image: url('../assets/button-arrow.svg');
+    }
+    &:hover {
+        background-color: @ui_green;
     }
 }

@@ -1,16 +1,19 @@
 <template>
     <div class="dictation">
-        <newDictation></newDictation>
+        <NewDictation></NewDictation>
+        <List></List>
     </div>
 </template>
 
 <script>
-import newDictation from '@/components/dictation/new.vue'
+import NewDictation from '@/components/dictation/New.vue'
+import List from '@/components/dictation/List.vue'
 
 export default {
     name: 'Dictation',
     components: {
-        newDictation
+        NewDictation,
+        List
     }
 }
 </script>

@@ -6,26 +6,25 @@
                 <template v-for="item in winControls">
                     <div 
                         v-if="item === 'expand'"
-                        class="win-control" 
-                        :class="'win-control-expand'" 
+                        class="win-control win-control-expand" 
                         :key="item"
                         @click="expand"></div>
                 </template>
             </div>
         </div>
         <div  class="win-body">
-            <newDictationInner v-if="winType === 'newDictation'"></newDictationInner>
+            <NewDictationInner v-if="winType === 'newDictation'"></NewDictationInner>
         </div>
     </div>
 </template>
 
 <script>
-import newDictationInner from '@/components/dictation/newInner.vue'
+import NewDictationInner from '@/components/dictation/NewInner.vue'
 
 export default {
     name: 'Win',
     components: {
-        newDictationInner
+        NewDictationInner
     },
     props: {
         title: {
@@ -96,6 +95,7 @@ export default {
         border-top-left-radius: @border_radius_big;
         border-top-right-radius: @border_radius_big;
         position: relative;
+        overflow:hidden;
         .win-title {
             padding-left: @win_padding;
             color: @win_title_color;
@@ -122,10 +122,19 @@ export default {
         width: @win_top_height;
         height: @win_top_height;
         cursor: pointer;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        &:hover {
+            background-color: rgba(0,0,0,.1);
+        }
+        &-expand {
+            background-image: url('../assets/minus.svg');
+        }
     }
     &.minimized {
         .win-top {
-            background-color: #3B8FAE;
+            background-color: @ui_blue;
             border-radius: @border_radius_big;
             .win-title {
                 color: #fff;
@@ -134,6 +143,12 @@ export default {
         .win-body {
             display: none;
         }
+        .win-control {
+            &-expand {
+                background-image: url('../assets/plus.svg');
+            }
+        }
     }
 }
+
 </style>
