@@ -27,6 +27,7 @@ body {
     flex-wrap: nowrap;
     flex-direction: row;
     background-color: #eee;
+    z-index: 20;
     .nav-item {
         height: 50px;
         line-height: 50px;
@@ -62,18 +63,23 @@ body {
         color: @text_color;
         padding-right: 20px;
     }
-    .ui-input {
-        color: @text_color;
-        height: @ui_height;
-        border-radius: @border_radius_middle;
-        border: @border;
-        background-color: #fff;
-        padding: 0 14px;
-        font-size: @font_size;
+}
+
+.ui-input {
+    color: @text_color;
+    height: @ui_height;
+    border-radius: @border_radius_middle;
+    border: @border;
+    background-color: #fff;
+    padding: 0 14px;
+    font-size: @font_size;
+    &::placeholder {
+        font-style: italic;
+        color: #ddd;
     }
 }
 
-.button {
+.ui-button {
     height: @ui_height;
     padding: 0 25px;
     color: #fff;
@@ -82,12 +88,25 @@ body {
     background-color: @ui_blue;
     border-radius: @border_radius_middle;
     cursor: pointer;
+    &.disabled {
+        background-color: transparent;
+        color: @ui_color_disabled;
+        border: 1px solid @ui_color_disabled;
+        cursor: default;
+        &:hover {
+            background-color: transparent;
+        }
+    }
     &.arrow {
         background-repeat: no-repeat;
         background-position: right 25px center;
         background-size: 16px;
         padding-right: 66px;
         background-image: url('../assets/button-arrow.svg');
+        &.disabled {
+            background-image: none;
+            padding-right: 25px;
+        }
     }
     &:hover {
         background-color: @ui_green;

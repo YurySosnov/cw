@@ -14,18 +14,24 @@
             <div class="ui-block">
                 <div class="ui-block-name">Language</div>
                 <UiSelect 
-                    :selectData="firstLangSelectData" 
-                    :htmlClass="firstLangSelectData.HtmlClass"></UiSelect>
+                    :list="langLists[0]" 
+                    :htmlClass="'select-lang'"
+                    :emitName="'setFirstLang'"
+                    :update="'applyFirstLang'"
+                    @setFirstLang="setFirstLang"></UiSelect>
             </div>
             <div class="ui-block">
                 <div class="ui-block-name">to</div>
                 <UiSelect 
-                    :selectData="secondLangSelectData" 
-                    :htmlClass="secondLangSelectData.HtmlClass"></UiSelect>
+                    :list="langLists[1]" 
+                    :htmlClass="'select-lang'"
+                    :emitName="'setSecondLang'"
+                    :update="'applySecondLang'"
+                    @setSecondLang="setSecondLang"></UiSelect>
             </div>
         </div>
         <div class="ui-line ui-line-last ui-line-align-right">
-            <button class="button arrow">Create</button>
+            <button class="ui-button arrow" :class="{'disabled':!createEnabled}">Create</button>
         </div>
     </div>
 </template>
@@ -38,39 +44,70 @@ export default {
     components: {
         UiSelect
     },
+    props: {
+        
+    },
+    methods: {
+        setLang: function(value,num) {
+            let num2 = (num === 0) ? 1 : 0;
+            this.langLists[num].forEach(lang => {
+                if (lang.value === value) {
+                    lang.selected = true;
+                    this.langs[num] = value;
+                } else {
+                    lang.selected = false;
+                }
+            });
+            this.langLists[num2].forEach(lang => {
+                if (lang.value !== value) {
+                    lang.selected = true;
+                    this.langs[num2] = lang.value;
+                    return true;
+                }
+            });
+            this.firstLang = this.langs[0];
+            this.secondLang = this.langs[1];
+        },
+        setFirstLang: function(value) {
+            this.setLang(value,0);
+            this.$root.$emit('applySecondLang',this.secondLang);
+        },
+        setSecondLang: function(value) {
+            this.setLang(value,1);
+            this.$root.$emit('applyFirstLang',this.firstLang);
+        },
+    },
     data: function() {
-        return {
-            firstLangSelectData: {
-                htmlClass: 'select-lang',
-                list: [
-                    {
-                        text: 'English',
-                        selected: true,
-                        value: 'en'
-                    },
-                    {
-                        text: 'Rusian',
-                        selected: false,
-                        value: 'ru'
-                    }
-                ]
+        let langList = [
+            {
+                text: 'English',
+                value: 'en'
             },
-            secondLangSelectData: {
-                htmlClass: 'select-lang',
-                list: [
-                    {
-                        text: 'English',
-                        selected: true,
-                        value: 'en'
-                    },
-                    {
-                        text: 'Rusian',
-                        selected: false,
-                        value: 'ru'
-                    }
-                ]
+            {
+                text: 'Rusian',
+                value: 'ru'
             }
+        ];
+        let langLists = [
+            langList,
+            langList
+        ];
+
+        let langs = [
+            langList[0].value,
+            langList[1].value
+        ];
+        return {
+            langs: [],
+            firstLang: langs[0],
+            secondLang: langs[1],
+            langLists: langLists,
+            createEnabled: false,
         };
+    },
+    mounted: function() {
+        this.$root.$emit('applyFirstLang',this.firstLang);
+        this.$root.$emit('applySecondLang',this.secondLang);
     }
 }
 </script>

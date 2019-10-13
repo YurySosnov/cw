@@ -1,8 +1,11 @@
 <template>
     <div class="dict-list-item">
         <div class="title">{{ title }}</div>
-        <UiSelect :selectData="selectData"></UiSelect>
-        <button class="button arrow start"></button>
+        <UiSelect 
+            :list="langList" 
+            :htmlClass="'dict-item-select'" 
+            :rounded="false"></UiSelect>
+        <button class="ui-button arrow start"></button>
     </div>
 </template>
 
@@ -24,21 +27,17 @@ export default {
             'en' : 'English',
             'ru' : 'Russian'
         };
-        let selectData = {
-            htmlClass: 'dict-item-select',
-            list: [],
-            rounded: false
-        };
+        let langList = []
         this.langs.forEach(langItem => {
             if (typeof possibleLangs[langItem] !== 'undefined') {
-                selectData.list.push({
+                langList.push({
                     value: langItem,
                     text: possibleLangs[langItem]
                 });
             }
         });
         return {
-            selectData: selectData,
+            langList: langList,
         }
     }
 }
@@ -65,7 +64,7 @@ export default {
         color: @text_color;
         padding: 0 16px;
     }
-    .button.start {
+    .ui-button.start {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         padding: 0;

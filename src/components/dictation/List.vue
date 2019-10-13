@@ -1,5 +1,8 @@
 <template>
     <div class="list">
+        <div class="dict-list-search">
+            <input class="ui-input" placeholder="Search dictation" type="text">
+        </div>
         <ListItem 
             v-for="(item,index) in items" 
             :key="'dict-list-item-' + index"
@@ -35,6 +38,15 @@ export default {
 .dictation {
     .list {
         width: 720px;
+    }
+}
+.dict-list-search {
+    width: 100%;
+    margin-bottom: 20px;
+    input {
+        display: block;
+        width: 100%;
+        position: relative;
     }
 }
 </style>

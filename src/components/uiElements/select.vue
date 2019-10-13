@@ -1,17 +1,17 @@
 <template>
     <span 
         class="select" 
-        :class="[selectData.htmlClass,{'expanded':expanded},{'rounded':rounded}]">
+        :class="[htmlClass,{'expanded':expanded},{'rounded':rounded}]">
         <button 
             class="select-field"
-            @click="expand()"
-            >{{ title }}</button>
+            @click="expand()">{{ title }}</button>
         <div class="select-list">
             <div 
                 class="select-item" 
-                v-for="(item,index) in selectData.list" 
+                v-for="(item,index) in selectList" 
                 :key="'select-item-' + index"
-                :data-value="item.value">{{ item.text }}</div>
+                :data-value="item.value"
+                @click="change(item.value)">{{ item.text }}</div>
         </div>
     </span>
 </template>
@@ -20,35 +20,75 @@
 export default {
     name: 'UiSelect',
     props: {
-        selectData: Object
+        list: {
+            type: Array,
+            default: function() {
+                return [];
+            }
+        },
+        emitName: String,
+        rounded: {
+            type: Boolean,
+            default: function() {
+                return true;
+            }
+        },
+        htmlClass: {
+            type: String,
+            default: function() {
+                return '';
+            }
+        },
+        update: {
+            type: String,
+            default: function() {
+                return '';
+            }
+        }
     },
     methods: {
-        getTitle: function() {
-            let title = this.selectData.list[0].text;
-            this.selectData.list.forEach(function(item){
-                if (typeof item.selected !== 'undefined' && 
-                    item.selected === true) {
-                    title = item.text;
-                }
-            });
-            return title;
-        },
-        getList: function() {
-            this.selectData.list;
-        },
         expand: function() {
             this.expanded = !this.expanded;
+        },
+        setValue: function(value) {
+            this.list.forEach(item => {
+                if (item.value === value) {
+                    item.selected = true;
+                    this.title = item.text;
+                } else {
+                    item.selected = false;
+                }
+            });
+        },
+        change: function(value,isEmit = true) {
+            this.expanded = false;
+            this.setValue(value);
+            if (isEmit) this.$emit(this.emitName,value);
         }
     },
     data: function() {
-        let rounded = true;
-        rounded = (typeof this.selectData.rounded === 'boolean') 
-            ? this.selectData.rounded 
-            : true;
+        let title = (this.list.length > 0) ? this.list[0].text : '';
+        let selectList = [];
+        this.list.forEach(item => {
+            if (typeof item.selected === 'undefined') {
+                item.selected = false;
+            }
+            selectList.push(item);
+        });
         return {
-            title: this.getTitle(),
+            title: title,
             expanded: false,
-            rounded: rounded
+            selectList: selectList
+        }
+    },
+    beforeMount: function() {
+        
+    },
+    mounted: function() {
+        if (this.update !== '') {
+            this.$root.$on(this.update, value => {
+                this.setValue(value);
+            });
         }
     }
 }
@@ -84,6 +124,7 @@ export default {
         border-radius: @border_radius_middle;
         margin-top: 2px;
         box-shadow: 0 6px 10px rgba(0,0,0,.3);
+        z-index: 10;
         .select-item {
             padding: 0 14px;
             height: @ui_height;
