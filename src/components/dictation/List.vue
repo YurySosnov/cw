@@ -12,15 +12,21 @@
             :title="item.title"
             :langs="item.langs"
             :initLang="item.initLang"></ListItem>
+        <Popup 
+            :popupTitle="'Confirm'" 
+            :popupContent="'Are you shure to remove this dictation?'" 
+            :popupButtons="confirmDeletePopupButtons"></Popup>
     </div>
 </template>
 
 <script>
+import Popup from '@/components/Popup.vue'
 import ListItem from '@/components/dictation/ListItem.vue'
 
 export default {
     name: 'List',
     components: {
+        Popup,
         ListItem
     },
     data: function() {
@@ -51,9 +57,22 @@ export default {
                 initLang: 'en'
             }
         ];
+        let confirmDeletePopupButtons = [
+            {
+                text: 'Delete',
+                action: '',
+                htmlClass: 'ui-button-delete'
+            },
+            {
+                text: 'Cancel',
+                action: '',
+                htmlClass: 'ui-button-cancel'
+            }
+        ]
         return {
             itemsSource: items,
-            items: items
+            items: items,
+            confirmDeletePopupButtons: confirmDeletePopupButtons
         }
     },
     methods: {
