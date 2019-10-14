@@ -123,7 +123,7 @@ export default {
         top: @ui_height;
         border-radius: @border_radius_middle;
         margin-top: 2px;
-        box-shadow: 0 6px 10px rgba(0,0,0,.3);
+        box-shadow: 0 3px 10px rgba(0,0,0,.3);
         z-index: 10;
         .select-item {
             padding: 0 14px;

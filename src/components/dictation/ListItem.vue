@@ -1,12 +1,15 @@
 <template>
+<div class="dict-list-line">
     <div class="dict-list-item">
         <div class="title">{{ title }}</div>
         <UiSelect 
             :list="langList" 
-            :htmlClass="'dict-item-select'" 
+            :htmlClass="'dict-item-lang-select'" 
             :rounded="false"></UiSelect>
         <button class="ui-button arrow start"></button>
     </div>
+    <div class="dict-list-item-remove"></div>
+</div>
 </template>
 
 <script>
@@ -46,6 +49,12 @@ export default {
 <style lang="less">
 @import "../../styles/_variables.less";
 
+.dict-list-line {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
 .dict-list-item {
     width: 100%;
     background-color: @win_background_color;
@@ -70,6 +79,27 @@ export default {
         padding: 0;
         width: @ui_height;
         background-position: center;
+    }
+}
+
+.dict-list-item-remove {
+    width: calc(@ui_height * .8);
+    flex-shrink: 0;
+    height: @ui_height;
+    margin-left: calc(@ui_height * .2);
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    background-size: 100%;
+    background-image: url('../../assets/remove.svg');
+    cursor: pointer;
+    &:hover {
+        opacity: .5;
+    }
+}
+
+.dict-item-lang-select {
+    .select-field {
+        width: 200px;
     }
 }
 
