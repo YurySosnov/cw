@@ -8,7 +8,7 @@
             :rounded="false"></UiSelect>
         <button class="ui-button arrow start"></button>
     </div>
-    <div class="dict-list-item-remove"></div>
+    <div class="dict-list-item-remove" @click="removeItem"></div>
 </div>
 </template>
 
@@ -18,12 +18,14 @@ import UiSelect from '@/components/uiElements/Select.vue'
 export default {
     name: 'DictListItem',
     components: {
-        UiSelect
+        UiSelect,
+        
     },
     props: {
         title: String,
         initLang: String,
-        langs: Array
+        langs: Array,
+        id: String
     },
     data: function() {
         let possibleLangs = {
@@ -41,6 +43,11 @@ export default {
         });
         return {
             langList: langList,
+        }
+    },
+    methods: {
+        removeItem: function() {
+            this.$root.$emit('setRemovableItemId',this.id);
         }
     }
 }

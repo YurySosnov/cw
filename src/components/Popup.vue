@@ -1,5 +1,5 @@
 <template>
-<div class="popup">
+<div class="popup" v-if="show">
     <div class="popup-tint" v-if="isTint"></div>
     <div class="popup-win">
         <div class="win-top" v-if="isTitle">
@@ -13,7 +13,7 @@
                     :class="button.htmlClass"
                     v-for="(button,index) in buttons" 
                     :key="'popup-buttons' + index"
-                    @click="button.action">{{ button.text }}</button>
+                    @click="buttonClick(button.action)">{{ button.text }}</button>
             </div>
         </div>
     </div>
@@ -43,17 +43,41 @@ export default {
         contentHtmlClass: {
             type: String,
             default: ''
-        }
+        },
+        popupInit: String
     },
     data: function() {
-        let isTitle = this.popupTitle.trim() !== '';
+        
         return {
             isTint: this.popupTint,
-            isTitle: isTitle,
+            isTitle: false,
             title: this.popupTitle,
             buttons : this.popupButtons,
-            content: this.popupContent
+            content: this.popupContent,
+            show: false,
+            popupData: {}
         }
+    },
+    methods: {
+        buttonClick: function(emitName) {
+            if (typeof this[emitName] !== 'function') {
+                this.$root.$emit(emitName,this.popupData);
+                this.hidePopup();
+            } else this[emitName]();
+        },
+        hidePopup: function() {
+            this.show = false;
+        },
+        showPopup: function() {
+            this.show = true;
+        }
+    },
+    mounted: function() {
+        this.isTitle = this.popupTitle.trim() !== '';
+        this.$root.$on(this.popupInit, (data) => {
+            this.popupData = data;
+            this.showPopup();
+        });
     }
 }
 </script>
