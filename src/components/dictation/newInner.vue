@@ -3,11 +3,19 @@
         <div class="ui-line">
             <div class="ui-block">
                 <div class="ui-block-name">Name</div>
-                <input type="text" class="ui-input input-dict-name">
+                <input 
+                    type="text" 
+                    class="ui-input input-dict-name" 
+                    v-model="name" 
+                    @input="validateForm">
             </div>
             <div class="ui-block">
                 <div class="ui-block-name">Words</div>
-                <input type="text" class="ui-input input-words-count">
+                <input 
+                    type="text" 
+                    class="ui-input input-words-count" 
+                    v-model="words" 
+                    @input="validateForm">
             </div>
         </div>
         <div class="ui-line">
@@ -44,9 +52,6 @@ export default {
     components: {
         UiSelect
     },
-    props: {
-        
-    },
     methods: {
         setLang: function(value,num) {
             let num2 = (num === 0) ? 1 : 0;
@@ -76,6 +81,9 @@ export default {
             this.setLang(value,1);
             this.$root.$emit('applyFirstLang',this.firstLang);
         },
+        validateForm: function() {
+            this.createEnabled = (this.name.length > 0 && parseInt(this.words) > 0);
+        }
     },
     data: function() {
         let langList = [
@@ -103,6 +111,9 @@ export default {
             secondLang: langs[1],
             langLists: langLists,
             createEnabled: false,
+
+            name: '',
+            words: 0
         };
     },
     mounted: function() {
