@@ -93,7 +93,7 @@ export default {
                 if (element.id === data.id) {
                     this.items.splice(index,1);
                     return false;
-                };
+                }
             });
         },
     },
