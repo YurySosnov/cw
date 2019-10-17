@@ -11,6 +11,12 @@
 body {
     font-family: @main_font;
     padding-top: 50px;
+    background-color: @ui_color_body;
+}
+
+button {
+    border: none;
+    background-color: transparent;
 }
 
 .content {
@@ -26,16 +32,16 @@ body {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    background-color: #eee;
+    background-color: @ui_color_nav;
     z-index: 20;
     .nav-item {
         height: 50px;
         line-height: 50px;
         padding: 0  20px;
         text-decoration: none;
-        color: #000;
+        color: @ui_color_nav_text;
         &:hover {
-            background-color: #ddd;
+            background-color: @ui_color_nav_hover;
         }
     }
 }
@@ -60,17 +66,17 @@ body {
     align-items: center;
     .ui-block-name {
         font-size: @font_size;
-        color: @text_color;
+        color: @ui_color_text;
         padding-right: 20px;
     }
 }
 
 .ui-input {
-    color: @text_color;
+    color: @ui_color_input_text;
     height: @ui_height;
     border-radius: @border_radius_middle;
-    border: @border;
-    background-color: #fff;
+    border: @ui_border;
+    background-color: @ui_color_input;
     padding: 0 14px;
     font-size: @font_size;
     &::placeholder {
@@ -85,13 +91,13 @@ body {
     color: #fff;
     border: none;
     font-size: @font_size;
-    background-color: @ui_blue;
+    background-color: @ui_color_button;
     border-radius: @border_radius_middle;
     cursor: pointer;
     &.disabled {
         background-color: transparent;
-        color: @ui_color_disabled;
-        border: 1px solid @ui_color_disabled;
+        color: @ui_color_cancel;
+        border: 1px solid @ui_color_cancel;
         cursor: default;
         &:hover {
             background-color: transparent;
@@ -109,82 +115,49 @@ body {
         }
     }
     &:hover {
-        background-color: @ui_green;
+        background-color: @ui_color_button_hover;
     }
     &-delete {
-        background-color: @ui_red;
+        background-color: @ui_color_decline;
         &:hover {
-            background-color: @ui_dark_red;
+            background-color: @ui_color_decline_hover;
         }
     }
     &-cancel {
-        background-color: @ui_grey;
+        background-color: @ui_color_cancel;
         &:hover {
-            background-color: @ui_dark_grey;
+            background-color: @ui_color_cancel_hover;
         }
     }
 }
 
-.win, 
-.popup {
-    .win-top {
-        background-color: @win_top_background_color;
-        height: @win_top_height;
-        border-top-left-radius: @border_radius_big;
-        border-top-right-radius: @border_radius_big;
-        position: relative;
-        overflow:hidden;
-        .win-title {
-            padding-left: @win_padding;
-            color: @win_title_color;
-            line-height: @win_top_height;
-            font-size: @win_title_font_size;
-        }
-    }
-    .win-body {
-        background-color: @win_background_color;
-        border-bottom-left-radius: @border_radius_big;
-        border-bottom-right-radius: @border_radius_big;
-        padding: @win_padding;
-    }
-    .win-controls {
-        position: absolute;
-        top: 0;
-        right: 0;
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        justify-content: flex-end;
-    }
-    .win-control {
-        width: @win_top_height;
-        height: @win_top_height;
+.ui-icon {
+    width: @ui_icon_size;
+    height: @ui_icon_size;
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    &-remove {
+        border-radius: 50%;
+        background-color: @ui_color_decline;
         cursor: pointer;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 16px;
+        &:before, &:after {
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: calc(@ui_icon_size * .4);
+            height: 2px;
+            background-color: @ui_icon_alt_color;
+            transform: rotate(45deg);
+            margin: -1px 0 0 calc(@ui_icon_size * -0.2);
+            content: ' '
+        }
+        &:after {
+            transform: rotate(135deg);
+        }
         &:hover {
-            background-color: rgba(0,0,0,.1);
-        }
-        &-expand {
-            background-image: url('../assets/minus.svg');
-        }
-    }
-    &.minimized {
-        .win-top {
-            background-color: @ui_blue;
-            border-radius: @border_radius_big;
-            .win-title {
-                color: #fff;
-            }
-        }
-        .win-body {
-            display: none;
-        }
-        .win-control {
-            &-expand {
-                background-image: url('../assets/plus.svg');
-            }
+            background-color: @ui_color_decline_hover;
         }
     }
 }

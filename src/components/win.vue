@@ -4,11 +4,11 @@
             <div class="win-title">{{ title }}</div>
             <div class="win-controls" v-if="hasControls">
                 <template v-for="item in winControls">
-                    <div 
+                    <button 
                         v-if="item === 'expand'"
                         class="win-control win-control-expand" 
                         :key="item"
-                        @click="expand"></div>
+                        @click="expand"></button>
                 </template>
             </div>
         </div>
@@ -84,3 +84,88 @@ export default {
     }
 }
 </script>
+
+<style lang="less">
+@import '../styles/_variables.less';
+
+.win, 
+.popup {
+    .win-top {
+        background-color: @win_top_background_color;
+        height: @win_top_height;
+        border-top-left-radius: @border_radius_big;
+        border-top-right-radius: @border_radius_big;
+        position: relative;
+        overflow:hidden;
+        .win-title {
+            padding-left: @win_padding;
+            color: @win_title_color;
+            line-height: @win_top_height;
+            font-size: @win_title_font_size;
+        }
+    }
+    .win-body {
+        background-color: @win_background_color;
+        border-bottom-left-radius: @border_radius_big;
+        border-bottom-right-radius: @border_radius_big;
+        padding: @win_padding;
+    }
+    .win-controls {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: flex-end;
+    }
+    .win-control {
+        width: @win_top_height;
+        height: @win_top_height;
+        cursor: pointer;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        &:hover {
+            background-color: rgba(0,0,0,.1);
+        }
+        &-expand {
+            &:before,
+            &:after {
+                display: block;
+                position: absolute;
+                content: ' ';
+                width: calc(@ui_icon_size * .4);
+                height: 2px;
+                background-color: @ui_icon_alt_color;
+                top: 50%;
+                left: 50%;
+                margin: -1px 0 0 calc(@ui_icon_size * -0.2);
+            }
+            &:after {
+                display: none;
+                transform: rotate(90deg);
+            }
+        }
+    }
+    &.minimized {
+        .win-top {
+            background-color: @ui_color_button;
+            border-radius: @border_radius_big;
+            .win-title {
+                color: #fff;
+            }
+        }
+        .win-body {
+            display: none;
+        }
+        .win-control {
+            &-expand {
+                &:after {   
+                    display: block;
+                }
+            }
+        }
+    }
+}
+</style>

@@ -104,10 +104,10 @@ export default {
         text-align: left;
         cursor: pointer;
         height: @ui_height;
-        background-color: @ui_light_blue;
+        background-color: @ui_color_element;
         position: relative;
         padding: 0 40px 0 14px;
-        color: @text_color;
+        color: @ui_color_element_text;
         font-size: @font_size;
         line-height: @ui_height;
         border: none;

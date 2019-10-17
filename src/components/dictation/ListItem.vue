@@ -8,7 +8,7 @@
             :rounded="false"></UiSelect>
         <button class="ui-button arrow start"></button>
     </div>
-    <div class="dict-list-item-remove" @click="removeItem"></div>
+    <div class="ui-icon ui-icon-remove dict-list-item-remove" @click="removeItem"></div>
 </div>
 </template>
 
@@ -77,7 +77,7 @@ export default {
         height: @ui_height;
         line-height: @ui_height;
         font-size: @font_size;
-        color: @text_color;
+        color: @ui_color_text;
         padding: 0 16px;
     }
     .ui-button.start {
@@ -89,19 +89,25 @@ export default {
     }
 }
 
+// .dict-list-item-remove {
+//     width: calc(@ui_height * .8);
+//     flex-shrink: 0;
+//     height: @ui_height;
+//     margin-left: calc(@ui_height * .2);
+//     background-repeat: no-repeat;
+//     background-position: right 0 center;
+//     background-size: 100%;
+//     background-image: url('../../assets/remove.svg');
+//     cursor: pointer;
+//     &:hover {
+//         opacity: .5;
+//     }
+// }
+
 .dict-list-item-remove {
-    width: calc(@ui_height * .8);
-    flex-shrink: 0;
-    height: @ui_height;
-    margin-left: calc(@ui_height * .2);
-    background-repeat: no-repeat;
-    background-position: right 0 center;
-    background-size: 100%;
-    background-image: url('../../assets/remove.svg');
-    cursor: pointer;
-    &:hover {
-        opacity: .5;
-    }
+    margin: calc(@ui_height * .1) 0 0 calc(@ui_height * .2);
+    width: @ui_icon_size;
+    min-width: @ui_icon_size;
 }
 
 .dict-item-lang-select {
