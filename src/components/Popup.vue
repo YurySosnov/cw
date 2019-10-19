@@ -3,6 +3,13 @@
     <div class="popup-tint" v-if="isTint"></div>
     <div class="popup-win">
         <div class="win-top" v-if="isTitle">
+            <div class="win-controls">
+                <div 
+                    class="win-control win-control-close ui-icon ui-icon-close"
+                    @click="hidePopup">
+                    <div class="icon"></div>
+                </div>
+            </div>
             <div class="win-title">{{ title }}</div>
         </div>
         <div class="win-body">
@@ -106,7 +113,6 @@ export default {
         left: 50%;
         transform: translate(-50%,-50%);
         overflow: hidden;
-        border-radius: @border_radius_big;
         box-shadow: 0 6px 20px rgba(0,0,0,.4);
     }
     .popup-win-buttons {

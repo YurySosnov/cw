@@ -8,10 +8,17 @@
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+    height: auto !important;
+}
+
 body {
+    min-height: 100%;
+    height: auto !important;
     font-family: @main_font;
-    padding-top: 50px;
-    background-color: @ui_color_body;
+    color: @ui_color_text;
+    .ui_body_background;
 }
 
 button {
@@ -26,13 +33,11 @@ button {
 .nav {
     width: 100%;
     height: 50px;
-    position: fixed;
     top: 0;
     left: 0;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    background-color: @ui_color_nav;
     z-index: 20;
     .nav-item {
         height: 50px;
@@ -40,8 +45,12 @@ button {
         padding: 0  20px;
         text-decoration: none;
         color: @ui_color_nav_text;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 2px;
+        font-size: calc(@font_size * .75);
         &:hover {
-            background-color: @ui_color_nav_hover;
+            color: @ui_color_nav_text_hover;
         }
     }
 }
@@ -79,6 +88,7 @@ button {
     background-color: @ui_color_input;
     padding: 0 14px;
     font-size: @font_size;
+    box-shadow: inset 0 2px 20px #00000020;
     &::placeholder {
         font-style: italic;
         color: #ddd;
@@ -91,7 +101,7 @@ button {
     color: #fff;
     border: none;
     font-size: @font_size;
-    background-color: @ui_color_button;
+    .ui_button_background;
     border-radius: @border_radius_middle;
     cursor: pointer;
     &.disabled {
@@ -132,32 +142,110 @@ button {
 }
 
 .ui-icon {
-    width: @ui_icon_size;
-    height: @ui_icon_size;
+    width: @win_top_height * .5;
+    height: @win_top_height * .5;
+    margin: @win_top_height * .25;
     position: relative;
-    display: block;
-    box-sizing: border-box;
-    &-remove {
+    overflow: hidden;
+    cursor: pointer;
+    .icon {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: @ui_icon_color_alpha;
+    }
+    &:hover {
+        .icon {
+            opacity: @ui_icon_color_alpha_hover;
+        }
+        border-color: @ui_color_icon_border_hover;
+    }
+
+    &-expand {
         border-radius: 50%;
-        background-color: @ui_color_decline;
-        cursor: pointer;
-        &:before, &:after {
-            display: block;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: calc(@ui_icon_size * .4);
-            height: 2px;
-            background-color: @ui_icon_alt_color;
-            transform: rotate(45deg);
-            margin: -1px 0 0 calc(@ui_icon_size * -0.2);
-            content: ' '
+        background-color: #ffbc3e;
+        border: 2px solid @ui_color_icon_border;
+        .icon {
+            &:before,
+            &:after {
+                display: block;
+                position: absolute;
+                content: ' ';
+                width: @icon_size;
+                height: 2px;
+                background-color: @ui_icon_color_source;
+                top: 50%;
+                left: 50%;
+                margin: -1px 0 0 @icon_size * -0.5;
+            }
+            &:after {
+                display: none;
+                transform: rotate(90deg);
+            }
         }
-        &:after {
-            transform: rotate(135deg);
-        }
-        &:hover {
-            background-color: @ui_color_decline_hover;
+        &.minimized {
+            .icon {
+                &:after {   
+                    display: block;
+                }
+            }
         }
     }
+    &-remove {
+        border-radius: 50%;
+        background-color: #f05c5c;
+        border: 2px solid @ui_color_icon_border;
+        .icon {
+            &:before,
+            &:after {
+                display: block;
+                position: absolute;
+                content: ' ';
+                width: @icon_size;
+                height: 2px;
+                background-color: @ui_icon_color_source;
+                top: 50%;
+                left: 50%;
+                margin: -1px 0 0 @icon_size * -0.5;
+                transform: rotate(45deg);
+            }
+            &:after {
+                transform: rotate(135deg);
+            }
+        }
+    }
+
+    &-close {
+        border-radius: 50%;
+        background-color: #9e9e9e;
+        border: 2px solid @ui_color_icon_border;
+        .icon {
+            &:before,
+            &:after {
+                display: block;
+                position: absolute;
+                content: ' ';
+                width: @icon_size;
+                height: 2px;
+                background-color: @ui_icon_color_source;
+                top: 50%;
+                left: 50%;
+                margin: -1px 0 0 @icon_size * -0.5;
+                transform: rotate(45deg);
+            }
+            &:after {
+                transform: rotate(135deg);
+            }
+        }
+    }
+}
+
+.win-controls {
+    position: relative;
+    min-width: @win_top_height * .4;
+    display: flex;
+    align-items: center;
 }

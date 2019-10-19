@@ -104,14 +104,14 @@ export default {
         text-align: left;
         cursor: pointer;
         height: @ui_height;
-        background-color: @ui_color_element;
+        .ui_button_background;
         position: relative;
         padding: 0 40px 0 14px;
         color: @ui_color_element_text;
         font-size: @font_size;
         line-height: @ui_height;
         border: none;
-        background-position: right 15px center;
+        background-position: right @ui_height * .3 center;
         background-size: 10px;
         background-repeat: no-repeat;
         background-image: url('../../assets/select-arrow.svg');
@@ -125,6 +125,7 @@ export default {
         margin-top: 2px;
         box-shadow: 0 3px 10px rgba(0,0,0,.3);
         z-index: 10;
+        overflow: hidden;
         .select-item {
             padding: 0 14px;
             height: @ui_height;

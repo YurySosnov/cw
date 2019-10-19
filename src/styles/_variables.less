@@ -1,54 +1,39 @@
-@main_font: Arial, Helvetica, sans-serief;
+@main_font: 'Open Sans', Arial, Helvetica, sans-serief;
 @border_radius_big: 16px;
 @border_radius_middle: 8px;
 
 @ui_height: 50px;
 
-@ui_icon_size: 40px;
+@ui_icon_color_source: #000;
+@ui_icon_color_alpha: .4;
+@ui_icon_color_alpha_hover: .6;
 
-@ui_icon_alt_color: #fff;
+@ui_icon_color: rgba(@ui_icon_color_source,@ui_icon_color_alpha);
+@ui_icon_color_hover: rgba(@ui_icon_color_source,@ui_icon_color_alpha_hover);
 
-// * default colors *
-// @ui_color_border: #707070;
-// @ui_color_button: #3B8FAE;
-// @ui_color_body: #fff;
-// @ui_color_win: #f5f5f5;
-// @ui_color_title: #E6E6E6;
-// @ui_color_title_text: #3e3e3e;
-// @ui_color_element: #E0EAEE;
-// @ui_color_accept: #68C264;
-// @ui_color_accept_hover: #10860a;
-// @ui_color_decline: #FF8585;
-// @ui_color_decline_hover: #D93535;
-// @ui_color_cancel: #888;
-// @ui_color_cancel_hover: #666;
-// @ui_color_nav: #eee;
-// @ui_color_nav_hover: #ddd;
-// @ui_color_nav_text: #000;
-// @ui_color_input: #fff;
-// @ui_border: 1px solid @ui_color_border;
-// @ui_color_text: #707070;
-
+@ui_color_icon_border: rgba(@ui_icon_color_source,@ui_icon_color_alpha);
+@ui_color_icon_border_hover: rgba(@ui_icon_color_source,@ui_icon_color_alpha_hover);
 
 @ui_color_body: #222831;
-@ui_color_text: #c0af94;
+@ui_color_text: #fff;
 @ui_color_win: #393e46;
 
 @ui_color_button: #5c636e;
 @ui_color_button_hover: #8d6262;
 
-@ui_color_title: #33313b;
-@ui_color_title_text: #918787;
+@ui_color_title: #575663;
+@ui_color_title_text: #ddd;
 
 @ui_color_element: #454e57;
 @ui_color_element_text: #cfceca;
-@ui_color_input: #232227;
+@ui_color_input: #00000075;
 @ui_color_input_text: #f5f4ec;
 
 
 @ui_color_nav: #0e2431;
 @ui_color_nav_hover: #241b1b;
-@ui_color_nav_text: #eeeeee;
+@ui_color_nav_text: #eeeeee44;
+@ui_color_nav_text_hover: #eeeeee;
 
 
 @ui_color_accept: #693e52;
@@ -61,14 +46,28 @@
 @ui_color_border: #656977;
 @ui_border: 1px solid @ui_color_border;
 
+.ui_body_background {
+    background: #2D2E37 linear-gradient(to right bottom,#484B5A,#2A2A33);
+}
+
+.ui_element_background {
+    background: #646771 linear-gradient(to right bottom,#787A85,#545660 );
+}
+
+.ui_button_background {
+    background: #00000044;
+}
 
 
-@font_size: 20px;
+@font_size: 18px;
 
 /* window */
 @win_background_color: @ui_color_win;
-@win_title_font_size: 30px;
+@win_title_font_size: @font_size * .8;
 @win_title_color: @ui_color_title_text;
 @win_top_background_color: @ui_color_title;
-@win_top_height: 70px;
+@win_top_height: 40px;
 @win_padding: 30px;
+
+// @ui_icon_size: @win_top_height * .2;
+@icon_size: @win_top_height * .2;

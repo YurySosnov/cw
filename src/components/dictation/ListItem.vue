@@ -1,14 +1,21 @@
 <template>
 <div class="dict-list-line">
     <div class="dict-list-item">
+        <div class="dict-list-item-left">
+            <div class="win-controls">
+            <button class="ui-icon ui-icon-remove dict-list-item-remove" @click="removeItem">
+                <span class="icon"></span>
+            </button>
+        </div>
         <div class="title">{{ title }}</div>
-        <UiSelect 
-            :list="langList" 
-            :htmlClass="'dict-item-lang-select'" 
-            :rounded="false"></UiSelect>
-        <button class="ui-button arrow start"></button>
+        </div>
+        <div class="dict-list-item-right">
+            <UiSelect 
+                :list="langList" 
+                :htmlClass="'dict-item-lang-select'"></UiSelect>
+        </div>
     </div>
-    <div class="ui-icon ui-icon-remove dict-list-item-remove" @click="removeItem"></div>
+    
 </div>
 </template>
 
@@ -64,21 +71,26 @@ export default {
 
 .dict-list-item {
     width: 100%;
-    background-color: @win_background_color;
+    .ui_element_background;
     border-radius: @border_radius_middle;
     display: flex;
     position: relative;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 20px;
+    &-left {
+        display: flex;
+        justify-content: flex-start;
+    }
+    &-right {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: @ui_height * .1;
+    }
     .title {
-        position: absolute;
-        left: 0;
-        top: 0;
         height: @ui_height;
         line-height: @ui_height;
         font-size: @font_size;
         color: @ui_color_text;
-        padding: 0 16px;
     }
     .ui-button.start {
         border-top-left-radius: 0;
@@ -86,28 +98,22 @@ export default {
         padding: 0;
         width: @ui_height;
         background-position: center;
+        margin-left: @ui_height * .1;
+    }
+    .select {
+        margin-top: @ui_height * .1;
+        .select-field {
+            height: @ui_height * 0.8;
+            line-height: @ui_height * 0.8;
+            background-position: right @ui_height * .2 center;
+        }
     }
 }
 
-// .dict-list-item-remove {
-//     width: calc(@ui_height * .8);
-//     flex-shrink: 0;
-//     height: @ui_height;
-//     margin-left: calc(@ui_height * .2);
-//     background-repeat: no-repeat;
-//     background-position: right 0 center;
-//     background-size: 100%;
-//     background-image: url('../../assets/remove.svg');
-//     cursor: pointer;
-//     &:hover {
-//         opacity: .5;
-//     }
-// }
-
 .dict-list-item-remove {
-    margin: calc(@ui_height * .1) 0 0 calc(@ui_height * .2);
-    width: @ui_icon_size;
-    min-width: @ui_icon_size;
+    // margin: calc(@ui_height * .1) 0 0 calc(@ui_height * .2);
+    // width: @ui_icon_size;
+    // min-width: @ui_icon_size;
 }
 
 .dict-item-lang-select {
