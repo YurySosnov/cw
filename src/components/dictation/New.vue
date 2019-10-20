@@ -4,7 +4,7 @@
         :htmlClass="'new-dictation'"
         :content="'New dictionary window'"
         :winType="'newDictation'"
-        :controls="{expand: true}"
+        :controls="{expand: false}"
         :winId="'newDictation'"></Win>
 </template>
 

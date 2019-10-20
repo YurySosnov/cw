@@ -3,8 +3,9 @@
     <div class="dict-list-item" >
         <div class="dict-list-item-left">
             <div class="ui-icons-controls">
-            <Icon :iconClass="['remove']" :action="'removeDictItem'" :actionData="id"></Icon>
-            <Icon :iconClass="['accept','remove-accept']"></Icon>
+            <Icon :iconClass="'remove'" :action="'removeDictItem'" :actionData="id"></Icon>
+            <Icon :iconClass="'download'"></Icon>
+            <Icon :iconClass="'edit'"></Icon>
         </div>
         <div class="title">{{ title }}</div>
         </div>
@@ -73,7 +74,7 @@ export default {
     .title {
         height: @ui_height;
         line-height: @ui_height;
-        font-size: @font_size;
+        font-size: 100%;
         color: @ui_color_text;
     }
     .ui-button.start {

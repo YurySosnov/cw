@@ -1,6 +1,10 @@
 <template>
     <div class="win" :class="[{'minimized' : minimized}, htmlClass]">
-        <WinTop :controls="['expand']" :title="'Create Dictation'" :minimized="minimized" :winId="winId"></WinTop>
+        <WinTop 
+            :controls="['expand']" 
+            :title="'Create Dictation'" 
+            :minimized="minimized" 
+            :winId="winId"></WinTop>
         <div  class="win-body">
             <NewDictationInner v-if="winType === 'newDictation'"></NewDictationInner>
         </div>

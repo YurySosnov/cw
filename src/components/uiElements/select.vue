@@ -99,7 +99,7 @@ export default {
 .select {
     display: inline-block;
     position: relative;
-    font-size: @font_size;
+    font-size: 100%;
     .select-field {
         text-align: left;
         cursor: pointer;
@@ -108,7 +108,7 @@ export default {
         position: relative;
         padding: 0 40px 0 14px;
         color: @ui_color_element_text;
-        font-size: @font_size;
+        font-size: 100%;
         line-height: @ui_height;
         border: none;
         background-position: right @ui_height * .3 center;

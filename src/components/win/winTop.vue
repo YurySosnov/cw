@@ -4,7 +4,7 @@
             <template v-for="item in winControls">
                 <Icon
                     v-if="item === 'expand'"
-                    :iconClass="['expand']"
+                    :iconClass="'expand'"
                     :key="item"
                     :action="'expandWindow'"
                     :actionData="winId"></Icon>
@@ -26,7 +26,8 @@ export default {
         id: String,
         controls: Array,
         title: String,
-        winId: String
+        winId: String,
+        minimized: Boolean
     },
     methods: {
         validateControls: function() {
@@ -40,6 +41,10 @@ export default {
             });
             
             return this.winControls.length > 0;
+        },
+        minimizedIconTitle: function() {
+            let titleText = this.minimized ? 'Expand' : 'Minimize';
+            return titleText;
         }
     },
     data: function() {
