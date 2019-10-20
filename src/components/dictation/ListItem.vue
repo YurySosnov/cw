@@ -1,18 +1,18 @@
 <template>
 <div class="dict-list-line">
-    <div class="dict-list-item">
+    <div class="dict-list-item" >
         <div class="dict-list-item-left">
-            <div class="win-controls">
-            <button class="ui-icon ui-icon-remove dict-list-item-remove" @click="removeItem">
-                <span class="icon"></span>
-            </button>
+            <div class="ui-icons-controls">
+            <Icon :iconClass="['remove']" :action="'removeDictItem'" :actionData="id"></Icon>
+            <Icon :iconClass="['accept','remove-accept']"></Icon>
         </div>
         <div class="title">{{ title }}</div>
         </div>
         <div class="dict-list-item-right">
-            <UiSelect 
-                :list="langList" 
-                :htmlClass="'dict-item-lang-select'"></UiSelect>
+            <select name="" id="" class="ui-select">
+                <option value="en">English</option>
+                <option value="ru">Russian</option>
+            </select>
         </div>
     </div>
     
@@ -20,13 +20,13 @@
 </template>
 
 <script>
-import UiSelect from '@/components/uiElements/Select.vue'
+// import { mapActions } from 'vuex'
+import Icon from '@/components/uiElements/icon.vue'
 
 export default {
     name: 'DictListItem',
     components: {
-        UiSelect,
-        
+        Icon
     },
     props: {
         title: String,
@@ -34,28 +34,9 @@ export default {
         langs: Array,
         id: String
     },
-    data: function() {
-        let possibleLangs = {
-            'en' : 'English',
-            'ru' : 'Russian'
-        };
-        let langList = []
-        this.langs.forEach(langItem => {
-            if (typeof possibleLangs[langItem] !== 'undefined') {
-                langList.push({
-                    value: langItem,
-                    text: possibleLangs[langItem]
-                });
-            }
-        });
-        return {
-            langList: langList,
-        }
-    },
-    methods: {
-        removeItem: function() {
-            this.$root.$emit('setRemovableItemId',this.id);
-        }
+    // methods: mapActions(['removeDictItem']),
+    async mounted() {
+        // this.removeDictItem(this.id);
     }
 }
 </script>
@@ -71,12 +52,15 @@ export default {
 
 .dict-list-item {
     width: 100%;
-    .ui_element_background;
+    // .ui_element_background;
     border-radius: @border_radius_middle;
     display: flex;
     position: relative;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all .2s;
+    box-sizing: content-box;
     &-left {
         display: flex;
         justify-content: flex-start;
@@ -100,13 +84,15 @@ export default {
         background-position: center;
         margin-left: @ui_height * .1;
     }
-    .select {
+    .ui-select {
         margin-top: @ui_height * .1;
-        .select-field {
-            height: @ui_height * 0.8;
-            line-height: @ui_height * 0.8;
-            background-position: right @ui_height * .2 center;
-        }
+        height: @ui_height * 0.8;
+        line-height: @ui_height * 0.8;
+        background-position: right @ui_height * .2 center;
+    }
+
+    &:hover {
+        background-color: #ffffff33;
     }
 }
 

@@ -1,18 +1,6 @@
 <template>
     <div class="win" :class="[{'minimized' : minimized}, htmlClass]">
-        <div class="win-top">
-            <div class="win-controls" v-if="hasControls">
-                <template v-for="item in winControls">
-                    <button 
-                        v-if="item === 'expand'"
-                        class="win-control win-control-expand ui-icon ui-icon-expand"
-                        :class="{'minimized' : minimized}" 
-                        :key="item"
-                        @click="expand"><span class="icon"></span></button>
-                </template>
-            </div>
-            <div class="win-title">{{ title }}</div>
-        </div>
+        <WinTop :controls="['expand']" :title="'Create Dictation'" :minimized="minimized"></WinTop>
         <div  class="win-body">
             <NewDictationInner v-if="winType === 'newDictation'"></NewDictationInner>
         </div>
@@ -21,10 +9,12 @@
 
 <script>
 import NewDictationInner from '@/components/dictation/NewInner.vue'
+import WinTop from './winTop.vue'
 
 export default {
     name: 'Win',
     components: {
+        WinTop,
         NewDictationInner
     },
     props: {
@@ -82,33 +72,22 @@ export default {
             hasControls: this.validateControls(),
             minimized: this.isMinimized()
         }
+    },
+    mounted: function() {
+        this.$on('expand',() => {
+            this.expand();
+        });
     }
 }
 </script>
 
 <style lang="less">
-@import '../styles/_variables.less';
+@import '../../styles/_variables.less';
 
 .win, 
 .popup-win {
     border-radius: @border_radius_middle;
     box-shadow: 0 3px 12px #00000033; 
-    .win-top {
-        background-color: @win_top_background_color;
-        height: @win_top_height;
-        border-top-left-radius: @border_radius_middle;
-        border-top-right-radius: @border_radius_middle;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        .win-title {
-            color: @win_title_color;
-            line-height: @win_top_height;
-            font-size: @win_title_font_size;
-        }
-    }
     .win-body {
         .ui_element_background;
         border-bottom-left-radius: @border_radius_middle;
@@ -122,13 +101,6 @@ export default {
         box-sizing: border-box;
     }
     &.minimized {
-        .win-top {
-            .ui_element_background;
-            border-radius: @border_radius_middle;
-            .win-title {
-                color: #fff;
-            }
-        }
         .win-body {
             display: none;
         }

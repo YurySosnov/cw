@@ -1,30 +1,19 @@
 <template>
     <Win
-        :title="winTitle" 
-        :htmlClass="htmlClass"
-        :content="winContent"
-        :winType="winType"
-        :controls="winControls"></Win>
+        :title="'Create dictation'" 
+        :htmlClass="'new-dictation'"
+        :content="'New dictionary window'"
+        :winType="'newDictation'"
+        :controls="{expand: true}"></Win>
 </template>
 
 <script>
-import Win from '@/components/Win.vue'
+import Win from '@/components/win/Win.vue'
 
 export default {
     name: 'newDictation',
     components: {
         Win
-    },
-    data: function() {
-        return {
-            winTitle: 'Create dictation',
-            winContent: 'New dictionary window',
-            winControls: {
-                expand: true
-            },
-            htmlClass: 'new-dictation',
-            winType: 'newDictation'
-        }
     }
 }
 </script>

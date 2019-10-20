@@ -21,72 +21,36 @@
         <div class="ui-line">
             <div class="ui-block">
                 <div class="ui-block-name">Language</div>
-                <UiSelect 
-                    :list="langLists[0]" 
-                    :htmlClass="'select-lang'"
-                    :emitName="'setFirstLang'"
-                    :update="'applyFirstLang'"
-                    @setFirstLang="setFirstLang"></UiSelect>
+                <select name="" id="" class="ui-select select-lang">
+                    <option value="en">English</option>
+                    <option value="ru">Russian</option>
+                </select>
             </div>
             <div class="ui-block">
                 <div class="ui-block-name">to</div>
-                <UiSelect 
-                    :list="langLists[1]" 
-                    :htmlClass="'select-lang'"
-                    :emitName="'setSecondLang'"
-                    :update="'applySecondLang'"
-                    @setSecondLang="setSecondLang"></UiSelect>
+                <select name="" id="" class="ui-select select-lang">
+                    <option value="en">English</option>
+                    <option value="ru">Russian</option>
+                </select>
             </div>
         </div>
         <div class="ui-line ui-line-last ui-line-align-right">
-            <button class="ui-button arrow" :class="{'disabled':!createEnabled}">Create</button>
+            <button class="ui-button " :class="{'disabled':!createEnabled}">Create</button>
         </div>
     </div>
 </template>
 
 <script>
-import UiSelect from '@/components/uiElements/Select.vue'
 
 export default {
     name: 'NewInner',
-    components: {
-        UiSelect
-    },
     methods: {
-        setLang: function(value,num) {
-            let num2 = (num === 0) ? 1 : 0;
-            this.langLists[num].forEach(lang => {
-                if (lang.value === value) {
-                    lang.selected = true;
-                    this.langs[num] = value;
-                } else {
-                    lang.selected = false;
-                }
-            });
-            this.langLists[num2].forEach(lang => {
-                if (lang.value !== value) {
-                    lang.selected = true;
-                    this.langs[num2] = lang.value;
-                    return true;
-                }
-            });
-            this.firstLang = this.langs[0];
-            this.secondLang = this.langs[1];
-        },
-        setFirstLang: function(value) {
-            this.setLang(value,0);
-            this.$root.$emit('applySecondLang',this.secondLang);
-        },
-        setSecondLang: function(value) {
-            this.setLang(value,1);
-            this.$root.$emit('applyFirstLang',this.firstLang);
-        },
         validateForm: function() {
             this.createEnabled = (this.name.length > 0 && parseInt(this.words) > 0);
         }
     },
     data: function() {
-        let langList = [
+        const langList = [
             {
                 text: 'English',
                 value: 'en'
@@ -117,8 +81,7 @@ export default {
         };
     },
     mounted: function() {
-        this.$root.$emit('applyFirstLang',this.firstLang);
-        this.$root.$emit('applySecondLang',this.secondLang);
+
     }
 }
 </script>
@@ -133,10 +96,7 @@ export default {
         text-align: center;
     }
 }
-.select-lang {
-    .select-field,
-    .select-item {
-        width: 250px;
-    }
+.ui-select.select-lang {
+    width: 250px;
 }
 </style>
