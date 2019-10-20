@@ -1,6 +1,6 @@
 <template>
     <div class="win" :class="[{'minimized' : minimized}, htmlClass]">
-        <WinTop :controls="['expand']" :title="'Create Dictation'" :minimized="minimized"></WinTop>
+        <WinTop :controls="['expand']" :title="'Create Dictation'" :minimized="minimized" :winId="winId"></WinTop>
         <div  class="win-body">
             <NewDictationInner v-if="winType === 'newDictation'"></NewDictationInner>
         </div>
@@ -39,6 +39,10 @@ export default {
         winType: {
             type: String,
             default: ''
+        },
+        winId: {
+            type: String,
+            required: true
         }
     },
     methods: {
@@ -74,7 +78,7 @@ export default {
         }
     },
     mounted: function() {
-        this.$on('expand',() => {
+        this.$root.$on('expandWindow-' + this.winId,() => {
             this.expand();
         });
     }

@@ -1,5 +1,10 @@
 <template>
-    <button class="ui-icon" :class="htmlClass" @click="iconClickAction"><span class="icon"></span></button>
+    <button 
+        class="ui-icon" 
+        :class="htmlClass" 
+        @click="iconClickAction">
+        <span class="icon"></span>
+    </button>
 </template>
 
 <script>
@@ -28,9 +33,14 @@ export default {
     },
     methods: {
         ...mapMutations(['removeDictItem']),
+        expandWindow: function (id) {
+            this.$root.$emit('expandWindow-' + this.actionData);
+        },
         iconClickAction: function() {
             if (this.isAction) {
-                this[this.action](this.actionData);
+                if (typeof this[this.action] === 'function') {
+                    this[this.action](this.actionData);
+                }
             }
         }
     }
@@ -93,13 +103,6 @@ export default {
             &:after {
                 display: none;
                 transform: rotate(90deg);
-            }
-        }
-        &.minimized {
-            .icon {
-                &:after {   
-                    display: block;
-                }
             }
         }
     }
@@ -175,6 +178,15 @@ export default {
             }
             &:after {
                 transform: rotate(135deg);
+            }
+        }
+    }
+}
+.win.minimized {
+    .ui-icon-expand {
+        .icon {
+            &:after {   
+                display: block;
             }
         }
     }

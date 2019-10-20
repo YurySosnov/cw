@@ -2,12 +2,12 @@
     <div class="win-top">
         <div class="ui-icons-controls" v-if="hasControls">
             <template v-for="item in winControls">
-                <button 
+                <Icon
                     v-if="item === 'expand'"
-                    class="win-control win-control-expand ui-icon ui-icon-expand"
-                    :class="{'minimized' : minimized}" 
+                    :iconClass="['expand']"
                     :key="item"
-                    @click="expand"><span class="icon"></span></button>
+                    :action="'expandWindow'"
+                    :actionData="winId"></Icon>
             </template>
         </div>
         <div class="win-title">{{ title }}</div>
@@ -15,21 +15,20 @@
 </template>
 
 <script>
+import Icon from '@/components/uiElements/icon.vue'
+
 export default {
     name: 'WinTop',
+    components: {
+        Icon
+    },
     props: {
         id: String,
         controls: Array,
         title: String,
-        minimized: {
-            type: Boolean,
-            default: false
-        }
+        winId: String
     },
     methods: {
-        expand: function() {
-            this.$parent.$emit('expand');
-        },
         validateControls: function() {
 
             this.winControls = [];
