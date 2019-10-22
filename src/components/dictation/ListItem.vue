@@ -21,11 +21,11 @@
                     :iconClass="'remove'" 
                     :action="'removeDictItem'" 
                     :actionData="id"></Icon>
-                <Icon 
+                <Icon v-if="enableListItemAdvancedOptions"
                     :iconClass="'download'"
                     :action="'downloadDictation'"
                     :actionData="id"></Icon>
-                <Icon 
+                <Icon v-if="enableListItemAdvancedOptions"
                     :iconClass="'edit'"
                     :action="'editDictation'"
                     :actionData="id"></Icon>
@@ -68,6 +68,11 @@ export default {
     async mounted() {
         // this.removeDictItem(this.id);
     },
+    data: function() {
+        return {
+            enableListItemAdvancedOptions: this.$store.state.enableListItemAdvancedOptions
+        }
+    }
 }
 </script>
 
@@ -124,12 +129,6 @@ export default {
     &:hover {
         background-color: #ffffff33;
     }
-}
-
-.dict-list-item-remove {
-    // margin: calc(@ui_height * .1) 0 0 calc(@ui_height * .2);
-    // width: @ui_icon_size;
-    // min-width: @ui_icon_size;
 }
 
 .dict-item-lang-select {

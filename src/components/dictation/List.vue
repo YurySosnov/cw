@@ -6,7 +6,7 @@
                 placeholder="Search dictation" 
                 type="text" @input="searchDict($event.target.value)">
         </div>
-        <div class="dict-list-top-bar">
+        <div v-if="enableAdvancedListOptons" class="dict-list-top-bar">
             <Icon
                 :class="{'dn':getMode() === 'listCheck'}"
                 :iconClass="'check'" 
@@ -66,6 +66,11 @@ export default {
     mounted: function() {
         this.fetchDictList();
     },
+    data: function() {
+        return {
+            enableAdvancedListOptons: this.$store.state.enableAdvancedListOptons
+        }
+    }
 }
 </script>
 <style lang="less">
@@ -85,5 +90,6 @@ export default {
 }
 .dict-list-top-bar {
     border-bottom: 1px solid #ffffff33;
+    margin-bottom: 10px;
 }
 </style>

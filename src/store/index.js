@@ -12,7 +12,11 @@ export default new Vuex.Store({
 		newDictWords: 0,
 		newDictLangFrom: 'en',
 		newDictLangTo: 'en',
-		mode: 'default'
+		mode: 'default',
+
+		/* ENV */
+		enableAdvancedListOptons: false,
+		enableListItemAdvancedOptions: false,
 	},
 	mutations: {
 		removeDictItem: function (state, id) {
