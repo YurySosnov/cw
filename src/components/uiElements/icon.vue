@@ -35,7 +35,8 @@ export default {
             'edit'           : 'Edit',
             'download'       : 'Download',
             'upload'         : 'Upload',
-            'confirm-remove' : 'Confirm remove'
+            'confirm-remove' : 'Confirm remove',
+            'check'          : 'Check'
         };
         let iconTitle = titles[this.iconClass];
         if (this.customTitle !== '') {
@@ -48,7 +49,16 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['removeDictItem']),
+        ...mapMutations([
+            'removeDictItem',
+            'checkItem',
+            'uncheckItem',
+            'toggleCheckMode',
+            'removeSelectedDictItems',
+            'editDictation',
+            'downloadDictation',
+            'downloadSelectedDictations'
+        ]),
         expandWindow: function (id) {
             this.$root.$emit('expandWindow-' + id);
         },
@@ -68,7 +78,9 @@ export default {
 
 .ui_icon_default_style {
     border-radius: 50%;
-    border: @icon_size * .25 solid @ui_color_icon_border;
+    // border: @icon_size * .2 solid #00000060;
+    border: @icon_size * .2 solid @ui_color_icon_border;
+    // box-shadow: inset 0 0 @win_top_height * .1 @ui_color_icon_border;
 }
 
 .ui_icon_default_icon_ba_style {
@@ -115,6 +127,31 @@ export default {
     }
 }
 
+.ui-icon-check {
+    .ui_icon_default_style;
+    background-color: #ffffff33;
+    .icon {
+        opacity: 0;
+        &:before,
+        &:after {
+            .ui_icon_default_icon_ba_style;
+            width: @icon_size * .5;
+            height: 2px;
+            margin: 0 0 0 @icon_size * -0.47;
+            transform: rotate(45deg);
+        }
+        &:after {
+            width: @icon_size;
+            transform: rotate(135deg);
+            margin: @icon_size * -.125 0 0 @icon_size * -0.3;
+        }
+    }
+    &:hover {
+        .icon {
+            opacity: .5;
+        }
+    }
+}
 .ui-icon-expand {
     .ui_icon_default_style;
     background-color: #ffbc3e;
@@ -189,7 +226,7 @@ export default {
 }
 .ui-icon-edit {
     .ui_icon_default_style;
-    background-color: #547dec;
+    background-color: #7396f5;
     .icon {
         width: @icon_size * .8;
         background-color: @ui_icon_color_source;
@@ -258,7 +295,7 @@ export default {
 }
 .ui-icon-download {
     .ui_icon_default_style;
-    background-color: #ff7d49;
+    background-color: #969e21;
     .icon {
         margin-top: @icon_size * -.05;
         &:before,

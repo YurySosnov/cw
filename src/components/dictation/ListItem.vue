@@ -1,12 +1,35 @@
 <template>
 <div class="dict-list-line">
-    <div class="dict-list-item" >
+    <div class="dict-list-item" :class="{'checked':checked}">
         <div class="dict-list-item-left">
             <div class="ui-icons-controls">
-            <Icon :iconClass="'remove'" :action="'removeDictItem'" :actionData="id"></Icon>
-            <Icon :iconClass="'download'"></Icon>
-            <Icon :iconClass="'edit'"></Icon>
-        </div>
+                <template v-if="getMode() === 'listCheck'">
+                    <Icon 
+                        :class="{'dn':!checked}"
+                        :iconClass="'accept'" 
+                        :action="'uncheckItem'" 
+                        :customTitle="'Uncheck'"
+                        :actionData="id"></Icon>
+                    <Icon 
+                        :class="{'dn':checked}"
+                        :iconClass="'check'" 
+                        :action="'checkItem'" 
+                        :customTitle="'Check'"
+                        :actionData="id"></Icon>
+                </template>
+                <Icon 
+                    :iconClass="'remove'" 
+                    :action="'removeDictItem'" 
+                    :actionData="id"></Icon>
+                <Icon 
+                    :iconClass="'download'"
+                    :action="'downloadDictation'"
+                    :actionData="id"></Icon>
+                <Icon 
+                    :iconClass="'edit'"
+                    :action="'editDictation'"
+                    :actionData="id"></Icon>
+            </div>
         <div class="title">{{ title }}</div>
         </div>
         <div class="dict-list-item-right">
@@ -21,7 +44,7 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import Icon from '@/components/uiElements/icon.vue'
 
 export default {
@@ -33,12 +56,18 @@ export default {
         title: String,
         initLang: String,
         langs: Array,
-        id: String
+        id: String,
+        checked: Boolean
     },
-    // methods: mapActions(['removeDictItem']),
+    methods: {
+        ...mapGetters(['getMode']),
+        isChecked: function() {
+            return this.checked;
+        }
+    },
     async mounted() {
         // this.removeDictItem(this.id);
-    }
+    },
 }
 </script>
 
