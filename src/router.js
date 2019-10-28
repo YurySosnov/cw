@@ -16,6 +16,11 @@ export default new Router({
       path: '/dictation',
       name: 'dictation',
        component: () => import('./views/Dictation.vue')
-    }
+    },
+    {
+      path: '/create',
+      name: 'create',
+      component: () => import('./views/CreateDictationPage.vue')
+    },
   ]
 })

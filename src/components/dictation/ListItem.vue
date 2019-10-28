@@ -3,23 +3,23 @@
     <div class="dict-list-item" :class="{'checked':checked}">
         <div class="dict-list-item-left">
             <div class="ui-icons-controls">
-                <template v-if="getMode() === 'listCheck'">
+                <template v-if="getListMode() === 'listCheck'">
                     <Icon 
                         :class="{'dn':!checked}"
                         :iconClass="'accept'" 
-                        :action="'uncheckItem'" 
+                        :action="'uncheckDictation'" 
                         :customTitle="'Uncheck'"
                         :actionData="id"></Icon>
                     <Icon 
                         :class="{'dn':checked}"
                         :iconClass="'check'" 
-                        :action="'checkItem'" 
+                        :action="'checkDictation'" 
                         :customTitle="'Check'"
                         :actionData="id"></Icon>
                 </template>
                 <Icon 
                     :iconClass="'remove'" 
-                    :action="'removeDictItem'" 
+                    :action="'removeDictation'" 
                     :actionData="id"></Icon>
                 <Icon v-if="enableListItemAdvancedOptions"
                     :iconClass="'download'"
@@ -60,7 +60,7 @@ export default {
         checked: Boolean
     },
     methods: {
-        ...mapGetters(['getMode']),
+        ...mapGetters(['getListMode']),
         isChecked: function() {
             return this.checked;
         }
@@ -87,7 +87,6 @@ export default {
 
 .dict-list-item {
     width: 100%;
-    // .ui_element_background;
     border-radius: @border_radius_middle;
     display: flex;
     position: relative;

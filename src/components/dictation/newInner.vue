@@ -14,7 +14,7 @@
                 <input 
                     type="text" 
                     class="ui-input input-words-count" 
-                    v-model="words" 
+                    v-model="wordsCount" 
                     @input="validateForm">
             </div>
         </div>
@@ -35,18 +35,29 @@
             </div>
         </div>
         <div class="ui-line ui-line-last ui-line-align-right">
-            <button class="ui-button " :class="{'disabled':!createEnabled}">Create</button>
+            <button 
+                class="ui-button " 
+                :class="{'disabled':!createEnabled}"
+                @click="createNewDictation">Create</button>
         </div>
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 
 export default {
     name: 'NewInner',
     methods: {
+        ...mapMutations(['setWordsCount','setSection']),
         validateForm: function() {
-            this.createEnabled = (this.name.length > 0 && parseInt(this.words) > 0);
+            this.setWordsCount(this.wordsCount);
+            this.createEnabled = (this.name.length > 0 && parseInt(this.wordsCount) > 0);
+        },
+        createNewDictation: function() {
+            if (this.createEnabled) {
+                this.setSection('create');
+            }
         }
     },
     data: function() {
@@ -77,7 +88,7 @@ export default {
             createEnabled: false,
 
             name: '',
-            words: 0
+            wordsCount: 0
         };
     },
     mounted: function() {

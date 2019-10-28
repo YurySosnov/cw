@@ -4,33 +4,33 @@
             <input 
                 class="ui-input" 
                 placeholder="Search dictation" 
-                type="text" @input="searchDict($event.target.value)">
+                type="text" @input="searchDictations($event.target.value)">
         </div>
-        <div v-if="enableAdvancedListOptons" class="dict-list-top-bar">
+        <div v-if="isAdvancedDictationsListOptions" class="dict-list-top-bar">
             <Icon
-                :class="{'dn':getMode() === 'listCheck'}"
+                :class="{'dn':getListMode === 'listCheck'}"
                 :iconClass="'check'" 
                 :action="'toggleCheckMode'"
                 :customTitle="'Enable check'"></Icon>
             <Icon
-                :class="{'dn':getMode() !== 'listCheck'}"
+                :class="{'dn':getListMode !== 'listCheck'}"
                 :iconClass="'accept'" 
                 :action="'toggleCheckMode'"
                 :customTitle="'Disable check'"></Icon>
 
             <Icon
-                :class="{'dn':getMode() !== 'listCheck'}"
+                :class="{'dn':getListMode !== 'listCheck'}"
                 :iconClass="'remove'" 
-                :action="'removeSelectedDictItems'"
+                :action="'removeSelectedDictations'"
                 :customTitle="'Remove selected dictations'"></Icon>
             <Icon
-                :class="{'dn':getMode() !== 'listCheck'}"
+                :class="{'dn':getListMode !== 'listCheck'}"
                 :iconClass="'download'" 
                 :action="'downloadSelectedDictations'"
                 :customTitle="'Download selected dictations'"></Icon>
         </div>
         <ListItem 
-            v-for="(item,index) in allDictations" 
+            v-for="(item,index) in getDictations" 
             :key="'dict-list-item-' + index"
             :title="item.title"
             :langs="item.langs"
@@ -57,18 +57,22 @@ export default {
         Popup,
         Icon
     },
-    computed: mapGetters(['allDictations']),
+    computed: mapGetters([
+        'getDictations',
+        'getListMode',
+        'isAdvancedDictationsListOptions',
+        'isAdvancedDictationsItemOptions'
+    ]),
     methods: {
-        ...mapGetters(['getMode']),
-        ...mapActions(['fetchDictList']),
-        ...mapMutations(['searchDict'])
+        ...mapActions(['fetchDictationsList']),
+        ...mapMutations(['searchDictations']),
     },
     mounted: function() {
-        this.fetchDictList();
+        this.fetchDictationsList();
     },
     data: function() {
         return {
-            enableAdvancedListOptons: this.$store.state.enableAdvancedListOptons
+            
         }
     }
 }

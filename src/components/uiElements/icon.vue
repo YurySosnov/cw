@@ -50,11 +50,11 @@ export default {
     },
     methods: {
         ...mapMutations([
-            'removeDictItem',
-            'checkItem',
-            'uncheckItem',
+            'removeDictation',
+            'checkDictation',
+            'uncheckDictation',
             'toggleCheckMode',
-            'removeSelectedDictItems',
+            'removeSelectedDictations',
             'editDictation',
             'downloadDictation',
             'downloadSelectedDictations'
