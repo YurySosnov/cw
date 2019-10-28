@@ -17,7 +17,6 @@
                 :iconClass="'accept'" 
                 :action="'toggleCheckMode'"
                 :customTitle="'Disable check'"></Icon>
-
             <Icon
                 :class="{'dn':getListMode !== 'listCheck'}"
                 :iconClass="'remove'" 

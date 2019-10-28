@@ -49,6 +49,25 @@ export default {
         }
     },
     methods: {
+        /* 
+        
+        This mutations from VUEX store. 
+        If method name wlii change, 
+        require change it in this place too
+        
+        removeDictation
+        checkDictation
+        uncheckDictation
+        toggleCheckMode
+        removeSelectedDictations
+        editDictation
+        downloadDictation
+        downloadSelectedDictations
+
+        from list module in 
+        @/store/modules/list
+
+        */
         ...mapMutations([
             'removeDictation',
             'checkDictation',
