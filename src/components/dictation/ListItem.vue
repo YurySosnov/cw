@@ -16,27 +16,36 @@
                         :action="'checkDictation'" 
                         :customTitle="'Check'"
                         :actionData="id"></Icon>
+                    <Icon 
+                        :iconClass="'remove'" 
+                        :action="'removeDictation'" 
+                        :actionData="id"></Icon>
+                    <Icon v-if="enableListItemAdvancedOptions"
+                        :iconClass="'download'"
+                        :action="'downloadDictation'"
+                        :actionData="id"></Icon>
+                    <Icon v-if="enableListItemAdvancedOptions"
+                        :iconClass="'edit'"
+                        :action="'editDictation'"
+                        :actionData="id"></Icon>
                 </template>
-                <Icon 
-                    :iconClass="'remove'" 
-                    :action="'removeDictation'" 
-                    :actionData="id"></Icon>
-                <Icon v-if="enableListItemAdvancedOptions"
-                    :iconClass="'download'"
-                    :action="'downloadDictation'"
-                    :actionData="id"></Icon>
-                <Icon v-if="enableListItemAdvancedOptions"
-                    :iconClass="'edit'"
-                    :action="'editDictation'"
-                    :actionData="id"></Icon>
+                
             </div>
         <div class="title">{{ title }}</div>
         </div>
         <div class="dict-list-item-right">
-            <select name="" id="" class="ui-select">
-                <option value="en">English</option>
-                <option value="ru">Russian</option>
-            </select>
+            <div class="dict-list-item-lang-changer">
+                <select name="" id="" class="ui-select">
+                    <option value="en">English</option>
+                    <option value="ru">Russian</option>
+                </select>
+                &nbsp;<Icon :iconClass="'next'" :class="'no-margin'"></Icon>&nbsp;
+                <select name="" id="" class="ui-select">
+                    <option value="en">Russian</option>
+                    <option value="ru">English</option>
+                </select>
+            </div>
+            <button class="ui-button margin-left slim">Start</button>
         </div>
     </div>
     
@@ -92,7 +101,6 @@ export default {
     position: relative;
     justify-content: space-between;
     margin-bottom: 10px;
-    cursor: pointer;
     transition: all .2s;
     box-sizing: content-box;
     &-left {
@@ -102,6 +110,7 @@ export default {
     &-right {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         padding-right: @ui_height * .1;
     }
     .title {
@@ -109,6 +118,16 @@ export default {
         line-height: @ui_height;
         font-size: 100%;
         color: @ui_color_text;
+        display: flex;
+        align-items: center;
+        &:before {
+                display: block;
+                content: ' ';
+                width: @ui_height * .1;
+                height: @ui_height * .1;
+                border-radius: 50%;
+                margin-right: @ui_height * .2;
+            }
     }
     .ui-button.start {
         border-top-left-radius: 0;
@@ -119,20 +138,25 @@ export default {
         margin-left: @ui_height * .1;
     }
     .ui-select {
-        margin-top: @ui_height * .1;
         height: @ui_height * 0.8;
         line-height: @ui_height * 0.8;
         background-position: right @ui_height * .2 center;
     }
 
     &:hover {
-        background-color: #ffffff33;
+        .title {
+            &:before {
+                background-color: #e5ff00;
+                box-shadow: 0 0 8px #e5ff00;
+            }
+        }
     }
-}
 
-.dict-item-lang-select {
-    .select-field {
-        width: 200px;
+    &-lang-changer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
     }
 }
 

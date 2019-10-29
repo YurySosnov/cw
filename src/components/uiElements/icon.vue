@@ -337,6 +337,33 @@ export default {
         }
     }
 }
+.ui-icon-next {
+    .ui_icon_default_style;
+    background-color: transparent;
+    border-color: transparent;
+    &:hover {
+        border-color: #ffffff22;
+        .icon {
+            opacity: .4;
+        }
+    }
+    .icon {
+        opacity: .4;
+        &:before,
+        &:after {
+            .ui_icon_default_icon_ba_style;
+            background-color: #ffffff;
+            width: @icon_size;
+            height: @icon_size * .25;
+            transform: rotate(45deg);
+            margin: -@icon_size * .4 0 0 -@icon_size * .4;
+        }
+        &:after {
+            transform: rotate(135deg);
+            margin-top: @icon_size * .16;
+        }
+    }
+}
 
 .win.minimized {
     .ui-icon-expand {
