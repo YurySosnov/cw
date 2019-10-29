@@ -1,19 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import list from './modules/list'
+import create from './modules/create'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 	modules: {
-		list
+		list,
+		create
 	},
 	state: {
-		newDictName: '',
-		newDictWordsCount: 0,
-		newDictLangFrom: 'en',
-		newDictLangTo: 'en',
-
 		section: 'home', // home, create, dictation
 	},
 	mutations: {

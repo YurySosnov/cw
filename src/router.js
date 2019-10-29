@@ -20,7 +20,7 @@ export default new Router({
     {
       path: '/create',
       name: 'create',
-      component: () => import('./views/CreateDictationPage.vue')
+      component: () => import('./views/Create.vue')
     },
   ]
 })

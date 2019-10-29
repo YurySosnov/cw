@@ -1,8 +1,8 @@
 <template>
 	<div id="app">
 		<div class="nav">
-			<router-link to="/" class="nav-item">Home</router-link>
-			<!-- <router-link to="/dictation" class="nav-item">Dictation</router-link> -->
+			<router-link to="/" class="nav-item">My dictations</router-link>
+			<router-link to="/create" class="nav-item">Create dictation</router-link>
 			<span class="nav-item">Upload dictaion</span>
 		</div>
 		<div class="content">

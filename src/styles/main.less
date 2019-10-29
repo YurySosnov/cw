@@ -79,6 +79,7 @@ button {
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
+    margin-bottom: 20px;
     .ui-block-name {
         font-size: 100%;
         color: @ui_color_text;
@@ -98,6 +99,10 @@ button {
     &::placeholder {
         font-style: italic;
         color: #ddd;
+    }
+    &.ui-input-words-count {
+        width: 100px;
+        text-align: center;
     }
 }
 
@@ -132,12 +137,13 @@ button {
 .ui-button {
     height: @ui_height;
     padding: 0 25px;
-    color: #fff;
+    color: #ffffffdd;
+    border: 2px solid #ffffff00;
     font-size: @font_size;
     .ui_button_background;
     border-radius: @border_radius_middle;
     cursor: pointer;
-    box-shadow: 0 2px 6px #00000030;
+    // box-shadow: 0 2px 6px #00000030;
     box-sizing: border-box;
     &.disabled {
         background-color: transparent;
@@ -161,7 +167,8 @@ button {
         }
     }
     &:hover {
-        background-color: @ui_color_button_hover;
+        border-color: #ffffff33;
+        // background-color: @ui_color_button_hover;
     }
     &-delete {
         background-color: @ui_color_decline;
@@ -174,5 +181,42 @@ button {
         &:hover {
             background-color: @ui_color_cancel_hover;
         }
+    }
+    &.margin-left {
+        margin-left: 20px;
+    }
+}
+
+.dictation-container {
+    width: 750px;
+}
+.dictation-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .ui-block {
+        margin-bottom: 0;
+    }
+}
+.dictation-top-right {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.dictation-title {
+    display: flex;
+    flex-direction: column;
+    .legend {
+        width: 100%;
+        text-align: left;
+        font-size: 12px;
+        line-height: 14px;
+        opacity: .3;
+    }
+    .name {
+        width: 100%;
+        text-align: left;
+        font-size: 30px;
+        line-height: 36px;
+        opacity: .7;
     }
 }

@@ -4,6 +4,7 @@
 
 <script>
 import CreateDictation from '@/components/dictation/Create.vue'
+
 export default {
     components: {
         CreateDictation
